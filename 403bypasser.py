@@ -174,7 +174,7 @@ class Query():
     def manipulateRequest(self):
         print((" Target URL: " + self.url + "\tTarget Path: " + self.dir + " ").center(121, "="))
         results = []
-        p = requests.post(self.url + self.dir)
+        p = requests.post(self.url + self.dir, verify=False)
         
         colour = self.checkStatusCode(p.status_code)
         reset = Style.RESET_ALL
@@ -199,7 +199,7 @@ class Query():
         line_width = 100
         
         for path in self.dirObject.newPaths:
-            r = requests.get(self.url + path)
+            r = requests.get(self.url + path, verify=False)
             
             colour = self.checkStatusCode(r.status_code)
             
@@ -220,7 +220,7 @@ class Query():
         line_width = 100
         
         for header in self.dirObject.newHeaders:
-            r = requests.get(self.url + self.dir, headers=header)
+            r = requests.get(self.url + self.dir, headers=header, verify=False)
             
             colour = self.checkStatusCode(r.status_code)
             reset = Style.RESET_ALL
@@ -238,7 +238,7 @@ class Query():
         
         results_2 = []
         for header in self.dirObject.rewriteHeaders:
-            r = requests.get(self.url, headers=header)
+            r = requests.get(self.url, headers=header, verify=False)
             
             colour = self.checkStatusCode(r.status_code)
             reset = Style.RESET_ALL
